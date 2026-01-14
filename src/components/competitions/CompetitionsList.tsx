@@ -65,37 +65,37 @@ export function CompetitionsList({ basePath = '/concursuri' }: CompetitionsListP
   const archivedCount = competitions?.filter(c => c.status === 'archived').length || 0;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as 'active' | 'archived')}>
-        <TabsList className="grid w-full max-w-md grid-cols-2">
-          <TabsTrigger value="active" className="gap-2">
-            Concursuri active
-            <span className="text-xs bg-status-active text-status-active-foreground px-1.5 py-0.5 rounded-full">
+        <TabsList className="grid w-full grid-cols-2 h-auto p-1">
+          <TabsTrigger value="active" className="gap-1.5 sm:gap-2 py-2.5 text-xs sm:text-sm">
+            <span className="hidden xs:inline">Concursuri</span> Active
+            <span className="text-[10px] sm:text-xs bg-status-active text-status-active-foreground px-1.5 py-0.5 rounded-full">
               {activeCount}
             </span>
           </TabsTrigger>
-          <TabsTrigger value="archived" className="gap-2">
-            Concursuri arhivate
-            <span className="text-xs bg-muted text-muted-foreground px-1.5 py-0.5 rounded-full">
+          <TabsTrigger value="archived" className="gap-1.5 sm:gap-2 py-2.5 text-xs sm:text-sm">
+            <span className="hidden xs:inline">Concursuri</span> Arhivate
+            <span className="text-[10px] sm:text-xs bg-muted text-muted-foreground px-1.5 py-0.5 rounded-full">
               {archivedCount}
             </span>
           </TabsTrigger>
         </TabsList>
 
-        {/* Filters */}
-        <div className="flex flex-col sm:flex-row gap-3 mt-6">
+        {/* Filters - stacked on mobile */}
+        <div className="flex flex-col gap-2 sm:flex-row sm:gap-3 mt-4 sm:mt-6">
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
               placeholder="Caută concursuri..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-9"
+              className="pl-9 h-11 sm:h-10 text-base sm:text-sm"
             />
           </div>
           <Select value={selectedYear} onValueChange={setSelectedYear}>
-            <SelectTrigger className="w-full sm:w-40">
-              <Filter className="h-4 w-4 mr-2" />
+            <SelectTrigger className="w-full sm:w-36 h-11 sm:h-10 text-base sm:text-sm">
+              <Filter className="h-4 w-4 mr-2 shrink-0" />
               <SelectValue placeholder="An" />
             </SelectTrigger>
             <SelectContent>
@@ -109,7 +109,7 @@ export function CompetitionsList({ basePath = '/concursuri' }: CompetitionsListP
           </Select>
         </div>
 
-        <TabsContent value="active" className="mt-6">
+        <TabsContent value="active" className="mt-4 sm:mt-6">
           <CompetitionsGrid 
             competitions={filteredCompetitions} 
             basePath={basePath}
@@ -117,7 +117,7 @@ export function CompetitionsList({ basePath = '/concursuri' }: CompetitionsListP
           />
         </TabsContent>
 
-        <TabsContent value="archived" className="mt-6">
+        <TabsContent value="archived" className="mt-4 sm:mt-6">
           <CompetitionsGrid 
             competitions={filteredCompetitions} 
             basePath={basePath}
@@ -140,15 +140,15 @@ function CompetitionsGrid({
 }) {
   if (competitions.length === 0) {
     return (
-      <div className="text-center py-12 bg-muted/30 rounded-lg border border-dashed">
-        <FileX className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-        <p className="text-muted-foreground">{emptyMessage}</p>
+      <div className="text-center py-8 sm:py-12 bg-muted/30 rounded-lg border border-dashed">
+        <FileX className="h-10 w-10 sm:h-12 sm:w-12 mx-auto text-muted-foreground mb-3 sm:mb-4" />
+        <p className="text-sm sm:text-base text-muted-foreground px-4">{emptyMessage}</p>
       </div>
     );
   }
 
   return (
-    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-3">
       {competitions.map(competition => (
         <CompetitionCard 
           key={competition.id} 
@@ -162,18 +162,18 @@ function CompetitionsGrid({
 
 function CompetitionsListSkeleton() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       <div className="flex gap-2">
-        <Skeleton className="h-10 w-40" />
-        <Skeleton className="h-10 w-40" />
+        <Skeleton className="h-11 sm:h-10 flex-1" />
+        <Skeleton className="h-11 sm:h-10 flex-1" />
       </div>
-      <div className="flex gap-3">
-        <Skeleton className="h-10 flex-1" />
-        <Skeleton className="h-10 w-40" />
+      <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+        <Skeleton className="h-11 sm:h-10 flex-1" />
+        <Skeleton className="h-11 sm:h-10 w-full sm:w-36" />
       </div>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-3">
         {[1, 2, 3, 4, 5, 6].map(i => (
-          <Skeleton key={i} className="h-48" />
+          <Skeleton key={i} className="h-44 sm:h-48" />
         ))}
       </div>
     </div>
