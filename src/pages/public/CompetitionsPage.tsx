@@ -1,15 +1,21 @@
 import { CompetitionsList } from '@/components/competitions/CompetitionsList';
+import { Award } from 'lucide-react';
 
 export default function CompetitionsPage() {
   return (
-    <div className="container py-8 md:py-12">
-      <div className="mb-8">
-        <h1 className="text-3xl md:text-4xl font-serif font-bold mb-2">
-          Concursuri ICMPP
-        </h1>
-        <p className="text-muted-foreground text-lg">
-          Consultați lista concursurilor pentru posturi disponibile la institutul nostru.
-        </p>
+    <div>
+      <div className="mb-6 flex items-center gap-3">
+        <div className="p-2 bg-primary rounded-lg">
+          <Award className="h-6 w-6 text-primary-foreground" />
+        </div>
+        <div>
+          <h1 className="text-xl md:text-2xl font-serif font-bold">
+            Concursuri ICMPP
+          </h1>
+          <p className="text-sm text-muted-foreground">
+            Posturi disponibile la institut
+          </p>
+        </div>
       </div>
       
       <CompetitionsList />
