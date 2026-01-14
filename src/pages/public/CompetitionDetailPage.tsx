@@ -8,9 +8,5 @@ export default function CompetitionDetailPage() {
     return null;
   }
 
-  return (
-    <div className="container py-8 md:py-12">
-      <CompetitionDetail slug={slug} />
-    </div>
-  );
+  return <CompetitionDetail slug={slug} />;
 }
